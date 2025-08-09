@@ -1,0 +1,280 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: var(--inter-ff);
+	font-weight: 300;
+	color: var(--text-color);
+}
+
+:root {
+	--primary: oklch(98.809% 0.00011 271.152);
+	--inner-bg: oklch(97.315% 0.00011 271.152);
+	--border-color: oklab(89.143% 0 -0.0001);
+	--text-color: oklab(34.688% 0.00804 0.00251);
+	--red: oklch(70.73% 0.18468 25.923);
+	--blue: oklch(75.786% 0.13286 245.48);
+	--overlay: oklab(34.688% 0.00804 0.00251 / 0.05);
+
+	--border-style: 0.0625rem solid var(--border-color);
+
+	--emote: 6.25rem;
+	--versus: 3.75rem;
+	--heading: 2.625rem;
+	--text-base: 0.875rem;
+	--text-medium: 1rem;
+
+	--radius-base: 0.625rem;
+	--radius-full: 50%;
+
+	--game-ff: "Press Start 2P", sans-serif;
+	--inter-ff: Inter, sans-serif;
+
+	--transition: all 0.2s ease-in-out;
+}
+
+img,
+.emote,
+.versus {
+	user-select: none;
+	pointer-events: none;
+}
+
+.scoreboard,
+.round,
+button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--inner-bg);
+	border: var(--border-style);
+	border-radius: var(--radius-base);
+}
+
+button {
+	font-size: var(--text-base);
+	padding: 0.625rem 1.25rem;
+	transition: var(--transition);
+	cursor: pointer;
+	gap: 0.625rem;
+
+	&:is(:hover, :focus, :active):not(:disabled) {
+		transform: translateY(-0.3125rem);
+		filter: brightness(0.98);
+	}
+
+	&:disabled {
+		filter: opacity(50%);
+	}
+}
+
+.overlay {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	background-color: var(--overlay);
+	backdrop-filter: blur(3px);
+	opacity: 0;
+	transition: var(--transition);
+	z-index: -1;
+
+	&.show{
+		z-index: 1;
+		opacity: 1;
+	}
+
+	.result-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 6vh;
+		background-color: var(--primary);
+		padding: 8vh 4vw;
+		width: 31.25rem;
+		border: var(--border-style);
+		border-radius: var(--radius-base);
+		text-align: center;
+
+		h2 {
+			font-family: var(--game-ff);
+			font-size: 1.75rem;
+		}
+
+		.user-content {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 2vh;
+
+			img {
+				width: 25%;
+				border-radius: var(--radius-full);
+				border: 0.25rem solid;
+
+				&.machine {
+					border-color: var(--red);
+				}
+
+				&.player {
+					border-color: var(--blue);
+				}
+			}
+
+			p:first-child {
+				font-weight: 500;
+			}
+
+			p {
+				font-size: var(--text-medium);
+			}
+		}
+
+		&.machine svg {
+			stroke: var(--red);
+		}
+
+		&.player svg {
+			stroke: var(--red);
+		}
+
+		q {
+			font-size: var(--text-base);
+		}
+
+		button {
+			width: 100%;
+		}
+	}
+}
+
+section {
+	position: relative;
+	height: 100dvh;
+	width: 100%;
+	background-color: var(--primary);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8vh;
+	padding-inline: 10vw;
+}
+
+header {
+	display: flex;
+	gap: 1.25rem;
+}
+
+.scoreboard {
+	overflow: hidden;
+
+	.score {
+		display: flex;
+		gap: 0.625rem;
+		align-items: center;
+
+		&.machine {
+			background-color: var(--red);
+		}
+
+		&.player {
+			background-color: var(--blue);
+		}
+
+		img {
+			width: 35px;
+			border-radius: var(--radius-full);
+		}
+
+		span {
+			color: var(--primary);
+		}
+	}
+
+	& > * {
+		padding: 0.3125rem 1.25rem;
+	}
+}
+
+.round {
+	background-color: var(--inner-bg);
+	padding: 0.3125rem 1.25rem;
+	border-radius: var(--radius-base);
+	gap: 0.625rem;
+}
+
+h1 {
+	text-align: center;
+	text-transform: uppercase;
+	font-family: var(--game-ff);
+	font-size: var(--heading);
+}
+
+.battle {
+	display: flex;
+	align-items: center;
+	gap: 6vw;
+	flex-wrap: wrap;
+
+	.profile {
+		display: flex;
+		align-items: center;
+		gap: 4vw;
+
+		.info {
+			display: flex;
+			align-items: center;
+			gap: 0.625rem;
+			font-size: var(--text-base);
+
+			.content p:first-child {
+				font-weight: 500;
+			}
+
+			img {
+				width: 3.125rem;
+				border-radius: var(--radius-full);
+				border: 0.1875rem solid;
+
+				.machine & {
+					border-color: var(--red);
+				}
+
+				.player & {
+					border-color: var(--blue);
+				}
+			}
+		}
+
+		.emote {
+			font-size: var(--emote);
+		}
+	}
+
+	.versus {
+		font-family: var(--game-ff);
+		font-size: var(--versus);
+	}
+}
+
+.select-move {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 4vh;
+
+	p {
+		font-size: var(--text-medium);
+	}
+
+	.moves {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1.25rem;
+	}
+}

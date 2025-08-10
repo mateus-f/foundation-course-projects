@@ -55,26 +55,11 @@ function showResultCard(computerScore, humanScore) {
 
 	if (result !== "draw") {
 		h2.textContent = "THE WINNER IS...";
-
-		if (result === "player") {
-			userContainer.picture.setAttribute(
-				"src",
-				USER_INFORMATION.player.picture
-			);
-			userContainer.picture.classList.add("player");
-			userContainer.name.textContent = USER_INFORMATION.player.name;
-			userContainer.category.textContent = USER_INFORMATION.player.category;
-			userContainer.quote.innerHTML = USER_INFORMATION.player.quote;
-		} else {
-			userContainer.picture.setAttribute(
-				"src",
-				USER_INFORMATION.machine.picture
-			);
-			userContainer.picture.classList.add("machine");
-			userContainer.name.textContent = USER_INFORMATION.machine.name;
-			userContainer.category.textContent = USER_INFORMATION.machine.category;
-			userContainer.quote.innerHTML = USER_INFORMATION.machine.quote;
-		}
+		userContainer.picture.setAttribute("src", USER_INFORMATION[result].picture);
+		userContainer.picture.classList.add(result);
+		userContainer.name.textContent = USER_INFORMATION[result].name;
+		userContainer.category.textContent = USER_INFORMATION[result].category;
+		userContainer.quote.innerHTML = USER_INFORMATION[result].quote;
 	} else {
 		h2.textContent = "DRAW! :/";
 		contentContainer.style.display = "none";
